@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b1020" />
+  <title>FUT Packs — открытие паков</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">FUT</span>
+      <span class="logo-sub">Packs</span>
+    </div>
+    <nav class="tabs" role="tablist">
+      <button class="tab active" data-view="store"     role="tab" aria-selected="true">Магазин</button>
+      <button class="tab"        data-view="inventory" role="tab" aria-selected="false">Инвентарь</button>
+      <button class="tab"        data-view="market"    role="tab" aria-selected="false">Продажа</button>
+    </nav>
+    <div class="coins" title="Монеты">
+      <span class="coin-icon" aria-hidden="true">●</span>
+      <span id="coins">0</span>
+    </div>
+  </header>
+
+  <main>
+    <!-- Магазин паков -->
+    <section id="view-store" class="view active">
+      <h1 class="screen-title">Магазин паков</h1>
+      <div id="packs" class="packs-grid"></div>
+      <div class="hint">Подсказка: на первом запуске у вас 5 000 монет. Прогресс сохраняется в браузере.</div>
+    </section>
+
+    <!-- Инвентарь -->
+    <section id="view-inventory" class="view">
+      <div class="screen-head">
+        <h1 class="screen-title">Мой клуб</h1>
+        <div class="filters">
+          <label class="filter">
+            <span>Редкость</span>
+            <select id="filter-rarity">
+              <option value="">все</option>
+              <option value="bronze">Bronze</option>
+              <option value="silver">Silver</option>
+              <option value="gold">Gold</option>
+              <option value="raregold">Rare Gold</option>
+              <option value="totw">TOTW</option>
+              <option value="hero">Hero</option>
+              <option value="icon">Icon</option>
+            </select>
+          </label>
+          <label class="filter">
+            <span>Сортировка</span>
+            <select id="filter-sort">
+              <option value="ovr-desc">Рейтинг ↓</option>
+              <option value="ovr-asc">Рейтинг ↑</option>
+              <option value="new-desc">Новые</option>
+              <option value="rarity-desc">Редкость ↓</option>
+            </select>
+          </label>
+        </div>
+      </div>
+      <div id="inventory-stats" class="stats-row"></div>
+      <div id="inventory" class="inventory-grid"></div>
+      <div id="inventory-empty" class="empty">Тут пока пусто. Откройте пакет в Магазине.</div>
+    </section>
+
+    <!-- Продажа -->
+    <section id="view-market" class="view">
+      <h1 class="screen-title">Продажа игроков</h1>
+      <p class="muted">Выберите карточки в инвентаре по клику, чтобы выделить, затем нажмите «Продать выбранных».
+        Можно продавать по одному прямо из карточки.</p>
+      <div class="market-actions">
+        <button id="sell-selected" class="btn primary" disabled>Продать выбранных</button>
+        <button id="sell-duplicates" class="btn">Продать всех дубликатов</button>
+        <button id="select-all" class="btn ghost">Выбрать всё</button>
+        <button id="clear-selection" class="btn ghost">Сбросить</button>
+      </div>
+      <div id="market-summary" class="market-summary">Выбрано: 0 · Получите: 0 монет</div>
+      <div id="market-grid" class="inventory-grid"></div>
+      <div id="market-empty" class="empty">Нет карточек для продажи.</div>
+    </section>
+  </main>
+
+  <!-- Модалка открытия пака -->
+  <div id="opening-overlay" class="overlay hidden" aria-hidden="true">
+    <div class="opening">
+      <div class="opening-stage">
+        <div class="flash"></div>
+        <div id="card-stage" class="card-stage"></div>
+      </div>
+      <div class="opening-controls">
+        <div id="opening-progress" class="opening-progress">0 / 0</div>
+        <button id="reveal-next" class="btn primary">Открыть следующего</button>
+        <button id="reveal-all" class="btn ghost">Раскрыть все</button>
+        <button id="close-opening" class="btn ghost hidden">Готово</button>
+      </div>
+      <div id="opening-summary" class="opening-summary hidden"></div>
+    </div>
+  </div>
+
+  <!-- Тост -->
+  <div id="toast" class="toast hidden"></div>
+
+  <!-- Подвал -->
+  <footer class="footer">
+    Это фан-проект. Имена и клубы вымышленные. Прогресс — локально в браузере.
+    <button id="reset" class="link">Сбросить прогресс</button>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
